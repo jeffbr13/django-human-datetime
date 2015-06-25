@@ -1,8 +1,7 @@
-import datetime
 from django.core import validators
 from django.core.exceptions import ValidationError
 from django.forms.fields import DateField, TimeField, DateTimeField
-from parser import parse
+from .parser import parse
 
 class HumanDateTimeField(DateTimeField):
     def to_python(self, value):
@@ -10,7 +9,7 @@ class HumanDateTimeField(DateTimeField):
             return None
         try:
             return parse(value)
-        except Exception, e:
+        except Exception as e:
             raise ValidationError(self.error_messages['invalid'])
 
 class HumanTimeField(TimeField):
@@ -19,7 +18,7 @@ class HumanTimeField(TimeField):
             return None
         try:
             return parse(value).time()
-        except Exception, e:
+        except Exception as e:
             raise ValidationError(self.error_messages['invalid'])
 
 class HumanDateField(DateField):
@@ -28,5 +27,5 @@ class HumanDateField(DateField):
             return None
         try:
             return parse(value).date()
-        except Exception, e:
+        except Exception as e:
             raise ValidationError(self.error_messages['invalid'])

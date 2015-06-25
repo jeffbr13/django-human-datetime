@@ -1,5 +1,5 @@
-from django.test import TestCase
-from parser import parse
+from unittest import TestCase
+from .parser import parse
 from datetime import datetime
 
 class HumanTests(TestCase):
@@ -10,4 +10,3 @@ class HumanTests(TestCase):
         t = parse('tomorrow 4PM')
         self.assertEqual(t.day, self.now.day+1)
         self.assertEqual(t.hour, 16)
-        
